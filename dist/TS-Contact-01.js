@@ -1,18 +1,5 @@
-type User = {
-    name: string,
-    age: number,
-    group: string,
-};
-
-type Admin = {
-    name: string;
-    age: number;
-    role: string;
-};
-
-type Person = User | Admin;
-
-const persons: Person[] = [
+"use strict";
+const persons = [
     {
         name: 'Иван Петров',
         age: 27,
@@ -41,16 +28,9 @@ const persons: Person[] = [
         group: 'Студент',
     },
 ];
-
-const logPerson = (user: {
-    name: string,
-    age: number,
-    role?: string,
-}): void => {
+const logPerson = (user) => {
     user.role && console.log(`${user.name}, ${user.age}, ${user.role}`);
     console.log(`${user.name}, ${user.age}`);
-
-}
-
+};
 console.log('Users:');
 persons.forEach(logPerson);
