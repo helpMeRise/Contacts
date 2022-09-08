@@ -71,10 +71,17 @@ const logPerson = (person: Person) => {
   console.log(` - ${person.name}, ${person.age}, ${information}`);
 }
 
-const filterUsers = (persons: Person[], criteria: {}): User[] =>
+const isUserKey = (user: User, key: string): key is keyof User => key in user;
+
+const filterUsers = (persons: Person[], criteria: Partial<User>): User[] =>
 persons.filter(isUser).filter((user) => {
-    const criteriaKeys = Object.keys(criteria) as (keyof User)[];
-    return criteriaKeys.every((fieldName) => user[fieldName] === criteria[fieldName]);
+    const criteriaKeys = Object.keys(criteria);
+    return criteriaKeys.every((fieldName) => {
+      if (isUserKey(user, fieldName)) {
+        return user[fieldName] === criteria[fieldName]
+      }
+      return false;
+    });
   });
 
 

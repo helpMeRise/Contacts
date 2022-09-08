@@ -51,9 +51,15 @@ const logPerson = (person) => {
     }
     console.log(` - ${person.name}, ${person.age}, ${information}`);
 };
+const isUserKey = (user, key) => key in user;
 const filterUsers = (persons, criteria) => persons.filter(isUser).filter((user) => {
     const criteriaKeys = Object.keys(criteria);
-    return criteriaKeys.every((fieldName) => user[fieldName] === criteria[fieldName]);
+    return criteriaKeys.every((fieldName) => {
+        if (isUserKey(user, fieldName)) {
+            return user[fieldName] === criteria[fieldName];
+        }
+        return false;
+    });
 });
 console.log('Users of age 24:');
 filterUsers(persons, {
