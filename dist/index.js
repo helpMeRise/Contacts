@@ -52,16 +52,17 @@ const logPerson = (person) => {
     console.log(` - ${person.name}, ${person.age}, ${information}`);
 };
 const isUserKey = (user, key) => key in user;
-const filterUsers = (persons, criteria) => persons.filter(isUser).filter((user) => {
+const isPersonKey = (user, key) => key in user;
+const filterPersons = (persons, criteria) => persons.filter((user) => {
     const criteriaKeys = Object.keys(criteria);
     return criteriaKeys.every((fieldName) => {
-        if (isUserKey(user, fieldName)) {
+        if (isPersonKey(user, fieldName)) {
             return user[fieldName] === criteria[fieldName];
         }
         return false;
     });
 });
-console.log('Users of age 24:');
-filterUsers(persons, {
-    age: 24
+console.log('Persons of age 24:');
+filterPersons(persons, {
+    age: 27
 }).forEach(logPerson);
